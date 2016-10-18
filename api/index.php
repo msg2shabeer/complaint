@@ -49,7 +49,22 @@ $app->get('/user/:id',function($uid) use($app){
 });
 
 // put a single user
-
+$app->post('/addUser/',function() use($app){
+	include_once 'config/db.php';
+	$usr_name 				= 	$app->request->post('usr_name');
+	$usr_userId 			= 	$app->request->post('usr_userId');
+	$usr_password 			=	$app->request->post('usr_password');
+	$insert 				= 	$complaint->users()->insert(
+		array(
+			"name" 			=> $usr_name, 
+			"user_id" 		=> $usr_userId,
+			"password"		=> md5($usr_password)
+			)
+		);
+	$result 				=	array('id' => $insert['id']);
+	$app->response()->header("Content-Type","application/json");
+	echo json_encode($result);
+});
 // get all complaints
 
 // get a complaint by its id
