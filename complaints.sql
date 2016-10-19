@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 16, 2016 at 10:56 AM
+-- Generation Time: Oct 19, 2016 at 08:30 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `complaints` (
   `customer_address` text NOT NULL,
   `customer_phone` char(12) NOT NULL,
   `complaint_phone` char(12) NOT NULL,
-  `priority` int(2) NOT NULL,
+  `no_calls` int(5) NOT NULL,
   `status_id` int(2) NOT NULL,
   `date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -115,6 +115,11 @@ ALTER TABLE `complaints`
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user_type`
