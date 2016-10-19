@@ -68,6 +68,23 @@ $app->post('/addUser/',function() use($app){
 });
 
 // get all complaints
+$app->get('/complaints/',function() use($app){
+	include_once 'config/db.php';
+	$complaints = array();
+	foreach ($complaint->complaints() as $complaint) {
+		$complaints[] = array(
+			'id'				=> $complaint['id'],
+			'customer_id'		=> $complaint['customer_id'],
+			'customer_address'	=> $complaint['customer_address'],
+			'customer_phone'	=> $complaint['customer_phone'],
+			'complaint_phone'	=> $complaint['complaint_phone'],
+			'no_calls'			=> $complaint['no_calls'],
+			'status_id'			=> $complaint['status_id']
+		);
+	}
+	$app->response()->header("Content-Type","application/json");
+	echo json_encode($complaints);
+});
 
 // get a complaint by its id
 
