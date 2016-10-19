@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 19, 2016 at 08:30 AM
+-- Generation Time: Oct 19, 2016 at 02:31 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `complaints` (
   `id` int(10) NOT NULL,
-  `customer_id` int(10) NOT NULL,
+  `customer_id` varchar(15) NOT NULL,
   `customer_address` text NOT NULL,
   `customer_phone` char(12) NOT NULL,
   `complaint_phone` char(12) NOT NULL,

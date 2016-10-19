@@ -74,6 +74,25 @@ $app->post('/addUser/',function() use($app){
 // get complaint by customer id
 
 // put a complaint
+$app->post('/addComplaint/',function() use($app){
+	include_once 'config/db.php';
+	include_once 'config/common_functions.php';
+	$cmpt_customer_id		= 	sanitize($app->request->post('cmpt_customer_id'));
+	$cmpt_customer_address	= 	sanitize($app->request->post('cmpt_customer_address'));
+	$cmpt_customer_phone	=	sanitize($app->request->post('cmpt_customer_phone'));
+	$cmpt_complaint_phone	=	sanitize($app->request->post('cmpt_complaint_phone'));
+	$insert 				= 	$complaint->complaints()->insert(
+		array(
+			"customer_id" 			=> $cmpt_customer_id, 
+			"customer_address" 	=> $cmpt_customer_address,
+			"customer_phone"		=> $cmpt_customer_phone,
+			"complaint_phone"		=> $cmpt_complaint_phone
+			)
+		);
+	$result 				=	array('id' => $insert['id']);
+	$app->response()->header("Content-Type","application/json");
+	echo json_encode($result);
+});
 
 // run the application
 $app->run();

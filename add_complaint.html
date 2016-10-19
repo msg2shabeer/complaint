@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add a Complaint</title>
+</head>
+<body>
+	<form name="add_complaint" id="add_complaint" method="POST" action="api/addComplaint/">
+		<table>
+			<tr>
+				<td>Customer ID</td>
+				<td><input name="cmpt_customer_id" id="cmpt_customer_id" type="text" /></td>
+			</tr>
+			<tr>
+				<td>Customer Address</td>
+				<td><input name="cmpt_customer_address" id="cmpt_customer_address" type="text" /></td>
+			</tr>
+			<tr>
+				<td>Customer Phone</td>
+				<td><input name="cmpt_customer_phone" id="cmpt_customer_phone" type="text" /></td>
+			</tr>
+			<tr>
+				<td>Complaint Reg. phone</td>
+				<td><input name="cmpt_complaint_phone" id="cmpt_complaint_phone" type="text" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" name="submit" /></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
