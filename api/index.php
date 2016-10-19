@@ -79,7 +79,8 @@ $app->get('/complaints/',function() use($app){
 			'customer_phone'	=> $complaint['customer_phone'],
 			'complaint_phone'	=> $complaint['complaint_phone'],
 			'no_calls'			=> $complaint['no_calls'],
-			'status_id'			=> $complaint['status_id']
+			'status_id'			=> $complaint['status_id'],
+			'date_time' 		=> $complaint['date_time']
 		);
 	}
 	$app->response()->header("Content-Type","application/json");
