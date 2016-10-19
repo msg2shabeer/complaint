@@ -51,9 +51,10 @@ $app->get('/user/:id',function($uid) use($app){
 // put a single user
 $app->post('/addUser/',function() use($app){
 	include_once 'config/db.php';
-	$usr_name 				= 	$app->request->post('usr_name');
-	$usr_userId 			= 	$app->request->post('usr_userId');
-	$usr_password 			=	$app->request->post('usr_password');
+	include_once 'config/common_functions.php';
+	$usr_name 				= 	sanitize($app->request->post('usr_name'));
+	$usr_userId 			= 	sanitize($app->request->post('usr_userId'));
+	$usr_password 			=	sanitize($app->request->post('usr_password'));
 	$insert 				= 	$complaint->users()->insert(
 		array(
 			"name" 			=> $usr_name, 
@@ -65,6 +66,7 @@ $app->post('/addUser/',function() use($app){
 	$app->response()->header("Content-Type","application/json");
 	echo json_encode($result);
 });
+
 // get all complaints
 
 // get a complaint by its id
