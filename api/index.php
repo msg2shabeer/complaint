@@ -110,6 +110,7 @@ $app->post('/addComplaint/',function() use($app){
 				"customer_address" 	=> $cmpt_customer_address,
 				"customer_phone"	=> $cmpt_customer_phone,
 				"complaint_phone"	=> $cmpt_complaint_phone,
+				"no_calls" 			=>	1,
 				"status_id"			=>	1
 				)
 			);

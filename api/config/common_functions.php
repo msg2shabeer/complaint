@@ -37,7 +37,8 @@ function any_open_complaint($customer_id){
     $connection1->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
     $complaint1 = new NotORM($connection1);
     $c_complaints = array();
-    foreach ($complaint1->complaints("customer_id",$customer_id)->and("status_id",1) as $c_complaint) {
+    $matchingComplaint = $complaint1->complaints()->where("customer_id = ? AND (status_id = ? OR status_id = ?)", $customer_id,1,2);
+    foreach ($matchingComplaint as $c_complaint) {
         $c_complaints[]       =   array(
                 'id'        =>  $c_complaint['id'],
             );
