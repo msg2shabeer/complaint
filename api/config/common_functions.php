@@ -69,4 +69,21 @@ function increment_no_calls($complaint_id){
     }
     return $result;
 }
+
+// Get complaint priority
+function get_complaint_priority($no_of_calls,$complaint_reg_time){
+    if ($no_of_calls > 5) {
+        $no_of_calls = 5;
+    }
+    
+    // get hour difference from complaint reg time and now
+    $current_time = time();
+    $hours = round(($current_time - strtotime($complaint_reg_time))/3600, 1);
+    if ($hours > 5) {
+        $hours = 5;
+    }
+
+    $priority = $no_of_calls + ($hours / 360 * 5);
+    return $priority;
+}
 ?>

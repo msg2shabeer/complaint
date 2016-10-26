@@ -51,7 +51,7 @@ $app->get('/user/:id',function($uid) use($app){
 
 // put a single user
 $app->post('/addUser/',function() use($app){
-	include_once 'config/db.php';
+	// include_once 'config/db.php';
 	include_once 'config/common_functions.php';
 	$usr_name 				= 	sanitize($app->request->post('usr_name'));
 	$usr_userId 			= 	sanitize($app->request->post('usr_userId'));
@@ -70,9 +70,12 @@ $app->post('/addUser/',function() use($app){
 
 // get all complaints
 $app->get('/complaints/',function() use($app){
-	include_once 'config/db.php';
+	// include_once 'config/db.php';
+	include_once 'config/common_functions.php';
 	$complaints = array();
 	foreach ($complaint->complaints() as $complaint) {
+		// get complaint priority
+		$c_priority = get_complaint_priority($complaint['no_calls'],$complaint['date_time']);
 		$complaints[] = array(
 			'id'				=> $complaint['id'],
 			'customer_id'		=> $complaint['customer_id'],
@@ -81,7 +84,8 @@ $app->get('/complaints/',function() use($app){
 			'complaint_phone'	=> $complaint['complaint_phone'],
 			'no_calls'			=> $complaint['no_calls'],
 			'status_id'			=> $complaint['status_id'],
-			'date_time' 		=> $complaint['date_time']
+			'date_time' 		=> $complaint['date_time'],
+			'priority' 			=> $c_priority
 		);
 	}
 	$app->response()->header("Content-Type","application/json");
