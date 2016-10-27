@@ -118,7 +118,30 @@ $app->get('/complaint/:id',function($cid) use($app){
 });
 
 
-// get complaint by customer id
+// get complaints by customer id
+$app->get('/complaintBy/customer/:id',function($cid) use($app){
+	include_once 'config/common_functions.php';
+	$complaints = array();
+	foreach ($complaint->complaints("customer_id = ?",$cid) as $scomplaint) {
+		// get complaint priority
+		$c_priority = get_complaint_priority($scomplaint['no_calls'],$scomplaint['date_time']);
+		$complaints[] = array(
+			'id'				=> $scomplaint['id'],
+			'customer_id'		=> $scomplaint['customer_id'],
+			'customer_name' 	=> $scomplaint['customer_name'],
+			'customer_address'	=> $scomplaint['customer_address'],
+			'customer_phone'	=> $scomplaint['customer_phone'],
+			'complaint_phone'	=> $scomplaint['complaint_phone'],
+			'no_calls'			=> $scomplaint['no_calls'],
+			'status_id'			=> $scomplaint['status_id'],
+			'status' 			=> $scomplaint->status['name'],
+			'date_time' 		=> $scomplaint['date_time'],
+			'priority' 			=> $c_priority
+		);
+		$app->response()->header("Content-Type","application/json");
+		echo json_encode($complaints);
+	}
+});
 
 // put a complaint
 $app->post('/addComplaint/',function() use($app){
