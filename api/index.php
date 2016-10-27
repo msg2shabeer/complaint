@@ -79,6 +79,7 @@ $app->get('/complaints/',function() use($app){
 		$complaints[] = array(
 			'id'				=> $complaint['id'],
 			'customer_id'		=> $complaint['customer_id'],
+			'customer_name' 	=> $complaint['customer_name'],
 			'customer_address'	=> $complaint['customer_address'],
 			'customer_phone'	=> $complaint['customer_phone'],
 			'complaint_phone'	=> $complaint['complaint_phone'],
@@ -101,6 +102,7 @@ $app->get('/complaint/:id',function($cid) use($app){
 		$s_complaint[] = array(
 			'id'				=>	$scomplaint['id'],
 			'customer_id'		=>	$scomplaint['customer_id'],
+			'customer_name' 	=>	$scomplaint['customer_name'],
 			'customer_address'	=>	$scomplaint['customer_address'],
 			'customer_phone'	=>	$scomplaint['customer_phone'],
 			'complaint_phone'	=>	$scomplaint['complaint_phone'],
@@ -123,6 +125,7 @@ $app->post('/addComplaint/',function() use($app){
 	// include_once 'config/db.php';
 	include_once 'config/common_functions.php';
 	$cmpt_customer_id		= 	sanitize($app->request->post('cmpt_customer_id'));
+	$cmpt_customer_name 	=	sanitize($app->request->post('cmpt_customer_name'));
 	$cmpt_customer_address	= 	sanitize($app->request->post('cmpt_customer_address'));
 	$cmpt_customer_phone	=	sanitize($app->request->post('cmpt_customer_phone'));
 	$cmpt_complaint_phone	=	sanitize($app->request->post('cmpt_complaint_phone'));
@@ -133,6 +136,7 @@ $app->post('/addComplaint/',function() use($app){
 		$insert 			= 	$complaint->complaints()->insert(
 			array(
 				"customer_id" 		=> $cmpt_customer_id, 
+				"customer_name"		=> $cmpt_customer_name,
 				"customer_address" 	=> $cmpt_customer_address,
 				"customer_phone"	=> $cmpt_customer_phone,
 				"complaint_phone"	=> $cmpt_complaint_phone,
