@@ -93,6 +93,28 @@ $app->get('/complaints/',function() use($app){
 });
 
 // get a complaint by its id
+$app->get('/complaint/:id',function($cid) use($app){
+	// include_once 'config/db.php';
+	include_once 'config/common_functions.php';
+	$s_complaint = array();
+	foreach ($complaint->complaints("id = ?",$cid) as $scomplaint) {
+		$s_complaint[] = array(
+			'id'				=>	$scomplaint['id'],
+			'customer_id'		=>	$scomplaint['customer_id'],
+			'customer_address'	=>	$scomplaint['customer_address'],
+			'customer_phone'	=>	$scomplaint['customer_phone'],
+			'complaint_phone'	=>	$scomplaint['complaint_phone'],
+			'no_calls'			=>	$scomplaint['no_calls'],
+			'status_id'			=>	$scomplaint['status_id'],
+			'status' 			=>	$scomplaint->status['name'],
+			'date_time'			=>	$scomplaint['date_time'],
+			'priority'			=>	get_complaint_priority($scomplaint['no_calls'],$scomplaint['date_time'])
+		);
+		$app->response()->header("Content-Type","application/json");
+		echo json_encode($s_complaint);
+	}
+});
+
 
 // get complaint by customer id
 
